@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: firstelements.student01
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: S4D_100
+          url: http://s4d.virtual:8000
+        app:
+          name: ZZ1_FST_01
+          description: First Fiori Elements Application of Group 01
+          package: ZTRAIN_01
+          transport: S4DK900162
+        exclude:
+          - /test/
