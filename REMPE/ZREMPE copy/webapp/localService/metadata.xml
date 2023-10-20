@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZISH_REMPE_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="MedicalRegistration" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdColegiado"/>
+                </Key>
+                <Property Name="IdColegiado" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Nº interl.ext." sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nombre" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Nombre" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Apellidos" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Apellidos" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dni" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Nº ident.fis.1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="Dir.cor.elec." sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Genero" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Sexo" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Telefono" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Teléfono" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ParentUnit" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UID interloc." sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="MedicalSpecialtySet" Relationship="ZISH_REMPE_SRV.Medical2Speciality" FromRole="FromRole_Medical2Speciality" ToRole="ToRole_Medical2Speciality"/>
+            </EntityType>
+            <EntityType Name="MedicalSpecialty" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdColegiado"/>
+                </Key>
+                <Property Name="IdColegiado" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Nº interl.ext." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Especialdad" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Especialidad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descripcion" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Denominación" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Medical2Speciality" sap:content-version="1">
+                <End Type="ZISH_REMPE_SRV.MedicalRegistration" Multiplicity="1" Role="FromRole_Medical2Speciality"/>
+                <End Type="ZISH_REMPE_SRV.MedicalSpecialty" Multiplicity="*" Role="ToRole_Medical2Speciality"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Medical2Speciality">
+                        <PropertyRef Name="IdColegiado"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Medical2Speciality">
+                        <PropertyRef Name="IdColegiado"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZISH_REMPE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="MedicalRegistrationSet" EntityType="ZISH_REMPE_SRV.MedicalRegistration" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="MedicalSpecialtySet" EntityType="ZISH_REMPE_SRV.MedicalSpecialty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Medical2SpecialitySet" Association="ZISH_REMPE_SRV.Medical2Speciality" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="MedicalRegistrationSet" Role="FromRole_Medical2Speciality"/>
+                    <End EntitySet="MedicalSpecialtySet" Role="ToRole_Medical2Speciality"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="https://SAPDES.GRUPORECOLETAS.COM:443/sap/opu/odata/sap/ZISH_REMPE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://SAPDES.GRUPORECOLETAS.COM:443/sap/opu/odata/sap/ZISH_REMPE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

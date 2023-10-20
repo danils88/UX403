@@ -1,0 +1,153 @@
+<mvc:View controllerName="autoregistromedico.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout">
+    <Page showFooter="false" id="page" title="{i18n>title}" class="sapUiSizeCompact">
+        <content>
+				<f:SimpleForm id="SimpleFormChangeColumn_twoGroups234"
+					editable="true"
+					layout="ColumnLayout"
+					columnsM="1"
+					columnsL="1"
+					columnsXL="1">
+					<f:content>
+						<Label id="numColegiadoLabel" text="Número de colegiado" />
+						<Input
+							id="numColegiadoInput"
+							placeholder="Número de colegiado"
+							change="handleChange"
+							value="{
+								path : 'DataModel>/IdCollegiate',
+								type : 'sap.ui.model.type.String',
+								constraints : {
+									minLength: 9
+								}
+							}"/>
+						<Label id="nombreLabel" text="Nombre" />
+						<Input
+							id="nombreInput"
+							placeholder="Nombre"
+							value="{
+								path : 'DataModel>/Name',
+								type : 'sap.ui.model.type.String',
+								constraints : {
+									minLength: 1
+								}
+							}"/>
+						<Label id="apellido1Label" text="Apellido 1" />
+						<Input
+							id="apellido1Input"
+							placeholder="Apellido 1"
+							value="{
+								path : 'DataModel>/Surname1',
+								type : 'sap.ui.model.type.String',
+								constraints : {
+									minLength: 1
+								}
+							}"/>
+						<Label id="apellido2Label" text="Apellido 2" />
+						<Input
+							id="apellido2Input"
+							placeholder="Apellido 2"
+							value="{
+								path : 'DataModel>/Surname2',
+								type : 'sap.ui.model.type.String',
+								constraints : {
+									minLength: 1
+								}
+							}"/>
+						<Label id="documentoLabel" text="Documento" />
+						<Select id="documentoSelect">
+							<items>
+								<core:Item id="dni" text="DNI" key="DNI" />
+								<core:Item id="nie" text="NIE" key="NIE" />
+                                <core:Item id="pasaporte" text="Pasaporte" key="PASAPORTE" />
+								<core:Item id="tarjetaResidencia" text="Tarjeta de Residencia Comunitaria" key="TARJETA_DE_RESIDENCIA_COMUNITARIA" />
+								<core:Item id="permisoResidencia" text="Permiso de Residencia y Trabajo" key="PERMISO_DE_RESIDENCIA_Y_TRABAJO" />
+								<core:Item id="documentosVarios" text="Documentos Varios" key="DOCUMENTOS_VARIOS" />
+								<core:Item id="tarjetaSanitaria" text="Tarjeta Sanitaria" key="TARJETA_SANITARIA" />
+							</items>
+						</Select>
+						<Input
+							id="documentoInput"
+							placeholder="Documento"
+							value="{
+								path : 'DataModel>/PersonalId',
+								type : 'sap.ui.model.type.String',
+								constraints : {
+									minLength: 1
+								}
+							}"/>
+						<Label id="emailLabel" text="E-mail" />
+						<Input
+							id="emailInput"
+							placeholder="Email"
+							type="Email"
+							value="{
+								path : 'DataModel>/Email',
+								type : 'sap.ui.model.type.String',
+								constraints : {
+									minLength: 1,
+									search : '\\S+@\\S+\\.\\S+'
+								}
+							}"/>
+						<Label id ="generoLabel" text="Género" />
+						<Select id="generoInput" selectedKey="{DataModel>/Gender}">
+							<items>
+								<core:Item id="genero4" text="No especificado" key="NO_ESPECIFICADO" />
+								<core:Item id="genero1" text="Hombre" key="HOMBRE" />
+								<core:Item id="genero2" text="Mujer" key="MUJER" />
+                                <core:Item id="genero3" text="Indeterminado" key="INDETERMINADO" />
+							</items>
+						</Select>
+						<Label id="tlfLabel" text="Teléfono" />
+						<Input
+							id="tlfInput"
+							placeholder="Teléfono"
+							value="{
+								path : 'DataModel>/Phone',
+								type : 'sap.ui.model.type.String',
+								constraints : {
+									minLength: 1
+								}
+							}"/>
+						<Label id="especialidadesLabel" text="Especialidades" />
+						<MultiComboBox
+						id="especialidadesInput"
+						selectionChange="handleSelectionChange"
+						selectionFinish="handleSelectionFinish"
+						selectedKeys="{DataModel>/Specialities}"
+						items="{
+							path: '/SpecialitiesSet',
+							sorter: { path: 'Description' }
+						}">
+							<core:Item id="item" key="{Idrempe}" text="{Description}"/>
+						</MultiComboBox>
+						<Label id ="prescriberTypeLabel" text="Tipo de Prescriptor" />
+						<Select id="prescriberTypeInput">
+							<items>
+								<core:Item id="12" text="Médico" key="MEDICO" />
+								<core:Item id="22" text="Podólogo" key="PODOLOGO" />
+								<core:Item id="32" text="Dentista" key="DENTISTA" />
+							</items>
+						</Select>
+					</f:content>
+				</f:SimpleForm>
+				<Toolbar id="_IDGenToolbar1">
+				<content>
+					<ToolbarSpacer id="_IDGenToolbarSpacer1" />
+					<Button id="aceptarBtn" type="Accept"
+							text="Aceptar"
+							press=".f_submit" />
+					<Button id="cancelarBtn"
+						text="Cancelar"
+						type="Reject"
+						press=".onOpenPopoverDialog"
+						ariaHasPopup="Dialog" />
+				</content>
+			</Toolbar>
+		</content>
+    </Page>
+</mvc:View>
